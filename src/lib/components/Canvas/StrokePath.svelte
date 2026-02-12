@@ -2,8 +2,12 @@
     import {getContext, onDestroy, onMount} from 'svelte';
     import type {CanvasContext} from '../../types/canvas';
 
-    export let path: string;
-    export let color: string;
+    interface Props {
+        path: string;
+        color: string;
+    }
+
+    let { path, color }: Props = $props();
 
     let canvasContext = getContext('canvas') as CanvasContext;
 

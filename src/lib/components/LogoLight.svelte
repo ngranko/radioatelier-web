@@ -12,8 +12,8 @@
         oSilouette,
         outerPerimeter,
         rSilouette
-    } from '../models/logo';
-    import type {AnimationFraming} from '../types/canvas';
+    } from '$lib/models/logo';
+    import type {AnimationFraming, AnimationPoint} from '$lib/types/canvas';
 
     interface LogoAnimationConfig {
         perimeter: AnimationFraming;
@@ -48,7 +48,7 @@
     }
 
     function calculateAnimationFraming(duration: number): AnimationFraming {
-        const result = [];
+        const result: AnimationPoint[] = [];
 
         for (const element in animationTemplate) {
             result[element] = {...animationTemplate[element], t: animationTemplate[element].t * duration};
@@ -59,26 +59,18 @@
 </script>
 
 <Canvas
-    class="logoLight"
+    class="absolute top-0 left-0"
     width={defaultWidth}
     height={defaultHeight}
     translate={[40, 40]}
     animate
     duration={animationDuration}
 >
-    <FillPathWithShadow path={outerPerimeter} color="white" shadowColor="#0097ff" opacity={animations.perimeter} />
-    <FillPathWithShadow path={atelierSilouette} color="white" shadowColor="#0097ff" opacity={animations.atelier} />
+    <FillPathWithShadow path={outerPerimeter} color="white" shadowColor="#009ca6" opacity={animations.perimeter} />
+    <FillPathWithShadow path={atelierSilouette} color="white" shadowColor="#009ca6" opacity={animations.atelier} />
     <FillPathWithShadow path={rSilouette} color="white" shadowColor="#fcbb3d" opacity={animations.r} />
     <FillPathWithShadow path={aSilouette} color="white" shadowColor="#fcbb3d" opacity={animations.a} />
     <FillPathWithShadow path={dSilouette} color="white" shadowColor="#fcbb3d" opacity={animations.d} />
     <FillPathWithShadow path={iSilouette} color="white" shadowColor="#fcbb3d" opacity={animations.i} />
     <FillPathWithShadow path={oSilouette} color="white" shadowColor="#fcbb3d" opacity={animations.o} />
 </Canvas>
-
-<style lang="scss">
-    :global(.logoLight) {
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-</style>

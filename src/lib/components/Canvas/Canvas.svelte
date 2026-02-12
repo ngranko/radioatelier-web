@@ -1,12 +1,19 @@
 <script lang="ts">
     import {onDestroy, onMount, setContext} from 'svelte';
     import type {AnimationFraming, AnimationPoint, DrawFn, Point} from '../../types/canvas';
+    import type {Snippet} from 'svelte';
 
-    export let width: number;
-    export let height: number;
-    export let translate: Point = [0, 0];
-    export let animate: boolean = false;
-    export let duration: number = 0;
+    interface Props {
+        width: number;
+        height: number;
+        translate?: Point;
+        animate?: boolean;
+        duration?: number;
+        class?: string;
+        children?: Snippet;
+    }
+
+    let { width, height, translate = [0, 0], animate = false, duration = 0, class: className = '', children }: Props = $props();
 
     let canvasElement: HTMLCanvasElement;
     let fnsToDraw = [] as DrawFn[];
@@ -24,7 +31,7 @@
             }
         },
         getAnimatedValue: (animationFraming: AnimationFraming) => {
-            let prevPoint: AnimationPoint;
+            let prevPoint: AnimationPoint = animationFraming[0];
 
             for (const element of animationFraming) {
                 if (element.t > getCurrentAnimationTick()) {
@@ -54,7 +61,7 @@
         }
     })
 
-    function init() {
+    function init(): CanvasRenderingContext2D {
         const baseScale = getBaseScale();
         const canvasScale = getCanvasScale(baseScale);
 
@@ -64,7 +71,7 @@
         canvasElement.width = width * canvasScale;
         canvasElement.height = height * canvasScale;
 
-        const ctx = canvasElement.getContext('2d');
+        const ctx = canvasElement.getContext('2d') as CanvasRenderingContext2D;
         ctx.scale(canvasScale, canvasScale);
         ctx.translate(...translate);
 
@@ -105,5 +112,5 @@
     }
 </script>
 
-<canvas class={$$props.class} bind:this={canvasElement}></canvas>
-<slot />
+<canvas class={className} bind:this={canvasElement}></canvas>
+{@render children?.()}

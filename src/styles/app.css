@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: oklch(0.55 0.18 195);
+  --color-accent: #fcbb3d;
+  --color-bg-dark: #0e1319;
+  --font-sans: sofia-pro, "Helvetica Neue", Arial, sans-serif;
+  
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg-dark);
+}

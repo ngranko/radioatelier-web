@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view:*)",
+      "Bash(npx svelte-check:*)",
+      "Bash(npm run build:*)"
+    ]
+  }
+}

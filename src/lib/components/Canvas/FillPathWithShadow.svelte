@@ -2,10 +2,14 @@
     import {getContext, onDestroy, onMount} from 'svelte';
     import type {AnimationFraming, CanvasContext} from '../../types/canvas';
 
-    export let path: string;
-    export let color: string;
-    export let shadowColor: string;
-    export let opacity: number | AnimationFraming;
+    interface Props {
+        path: string;
+        color: string;
+        shadowColor: string;
+        opacity: number | AnimationFraming;
+    }
+
+    let { path, color, shadowColor, opacity }: Props = $props();
 
     let canvasContext = getContext('canvas') as CanvasContext;
 

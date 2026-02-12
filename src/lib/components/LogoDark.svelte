@@ -14,7 +14,7 @@
         radioBackground,
         rSilouette,
         supportLines
-    } from '../models/logo';
+    } from '$lib/models/logo';
     import StrokePath from './Canvas/StrokePath.svelte';
 </script>
 
